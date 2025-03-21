@@ -38,7 +38,7 @@ const buyo = require('./bridge/buy');
 const addresso = require('./bridge/address');
 
 
-/* mongoose.connect("mongodb://localhost:27017/ot").then(() => {console.log("Mongodb connected Successfully")}).catch((err) => {console.log("Errore : ",err)}); */
+/*mongoose.connect("mongodb://localhost:27017/ot").then(() => {console.log("Mongodb connected Successfully")}).catch((err) => {console.log("Errore : ",err)}); */
 mongoose.connect("mongodb+srv://sakthivelveld133:b4TcNa8LaSkROxyA@ecomex.vhl6n.mongodb.net/?retryWrites=true&w=majority&appName=Ecomex").then(() => {console.log("Mongodb connected Successfully")}).catch((err) => {console.log("Errore : ",err)});
 
 
@@ -141,7 +141,7 @@ app.post("/ot/baseone/item", upload.single("itemimage"), async(req, res) => {
       const getitem = await otitem.find({})
       const itemsWithImageUrl = getitem.map(item => ({
         ...item._doc,
-        itemimage: item.itemimage ? `http://192.168.3.168:2001/ot/baseone/uploads/${item.itemimage}` : null,
+        itemimage: item.itemimage ? `https://ecombackendtest3.onrender.com/ot/baseone/uploads/${item.itemimage}` : null,
       }));
 
       res.status(200).json(itemsWithImageUrl);
@@ -167,7 +167,7 @@ app.post("/ot/baseone/item", upload.single("itemimage"), async(req, res) => {
   
           // Normalize the image path to ensure relative paths are used
           const normalizePath = (imagePath) => {
-              const baseUrl = "http://192.168.3.168:2001/ot/baseone";
+              const baseUrl = "https://ecombackendtest3.onrender.com/ot/baseone";
               return imagePath.startsWith(baseUrl) ? imagePath.replace(baseUrl, "") : imagePath;
           };
   
@@ -273,7 +273,7 @@ app.get("/ot/baseone/ad", async (req, res) => {
        const getimage = await corimage.find({})
        const getimagewithlink = getimage.map(image => ({
         ...image._doc,
-        image : image.image ? `http://192.168.3.168:2001/ot/baseone/uploads/${image.image}` : null,
+        image : image.image ? `https://ecombackendtest3.onrender.com/ot/baseone/uploads/${image.image}` : null,
        })) ;
        res.status(200).json(getimagewithlink); 
     } catch (error) {
